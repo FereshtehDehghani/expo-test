@@ -1,33 +1,36 @@
-import { Tabs } from 'expo-router';
+import { StyleSheet } from "react-native";
+import { Tabs, TabList, TabTrigger, TabSlot } from "expo-router/ui";
+import { CustomTabButton } from "@/components/CustomTabButton";
 
-import Ionicons from '@expo/vector-icons/Ionicons';
-
-
-export default function TabLayout() {
+export default function Layout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: '#ffd33d',
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="about"
-        options={{
-          title: 'About',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'information-circle' : 'information-circle-outline'} color={color} size={24}/>
-          ),
-        }}
-      />
+    <Tabs>
+      <TabSlot />
+      <TabList style={styles.tabList}>
+        <TabTrigger name='home' href='/' asChild>
+          <CustomTabButton icon='home'>Home</CustomTabButton>
+        </TabTrigger>
+        <TabTrigger name='search' href='/about' asChild>
+          <CustomTabButton icon='search'>Search</CustomTabButton>
+        </TabTrigger>
+        <TabTrigger name='settings' href='/settings' asChild>
+          <CustomTabButton icon='settings'>Settings</CustomTabButton>
+        </TabTrigger>
+      </TabList>
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabList: {
+    display: "flex",
+    position: "absolute",
+    bottom: 32,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "red",
+    width: "100%",
+    padding: 8,
+  },
+});
